@@ -1,0 +1,1 @@
+from CoolDomainName import CoolDomainName

@@ -53,6 +53,7 @@ class Config(object):
 
         # SiteCreate
         action = self.subparsers.add_parser("siteCreate", help='Create a new site')
+        action.add_argument('domain', help='Preferred domain name')
 
         # SiteNeedFile
         action = self.subparsers.add_parser("siteNeedFile", help='Get a file from site')

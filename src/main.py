@@ -134,14 +134,19 @@ class Actions(object):
 
     # Site commands
 
-    def siteCreate(self):
-        logging.info("Generating new privatekey...")
+    def siteCreate(self, domain):
+        logging.info("Generating new privatekey for domain %s ..." % domain)
         from Crypt import CryptBitcoin
-        privatekey = CryptBitcoin.newPrivatekey()
+        from CoolDomainName import CoolDomainName
+        cdn = CoolDomainName();
+        while True:
+            privatekey = CryptBitcoin.newPrivatekey()
+            address = CryptBitcoin.privatekeyToAddress(privatekey)
+            if(cdn.isDomainNameCool(address, domain)):
+                break
         logging.info("----------------------------------------------------------------------")
         logging.info("Site private key: %s" % privatekey)
         logging.info("                  !!! ^ Save it now, required to modify the site ^ !!!")
-        address = CryptBitcoin.privatekeyToAddress(privatekey)
         logging.info("Site address:     %s" % address)
         logging.info("----------------------------------------------------------------------")
 
